@@ -292,7 +292,7 @@
 			setRange(list) {
 				let selectList = list.filter(item => item.selected)
 				let min = Number(this.min) || 0
-				let max = Number(this.max) || ''
+				let max = Number(this.max) || 6
 				list.forEach((item, index) => {
 					if (this.multiple) {
 						if (selectList.length <= min) {

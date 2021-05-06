@@ -8,7 +8,7 @@
 			<view class="input">
 				<input
 				 class="inputElement id" 
-				 v-model="userInfo.id" 
+				 v-model="userInfo.username" 
 				 placeholder="请输入账号"
 				/>
 				<input
@@ -19,8 +19,8 @@
 				/>
 			</view>
 			<view class="functions">
-				<button class="login" type="primary" block>登录</button>
-				<text class="enroll">没有账号，前去注册</text>
+				<button class="login" @click="login" type="primary" block>登录</button>
+				<text class="enroll" @click="enroll">没有账号，前去注册</text>
 				<!-- <button class="enroll" type="primary" block>注册</button> -->
 			</view>
 		</view>
@@ -33,13 +33,53 @@
 			return {
 
 				userInfo:{
-						id:'',
+						username:'',
 						password:''
 					}
 			}
 		},
 		methods: {
-			
+			async login(){
+				const res = await this.$http.post('login',this.userInfo).catch(error=>{
+					if (error.response.status == 421){
+						uni.showToast({
+							icon: 'none',
+							title: '用户不存在',
+							duration: 2000
+						});
+					}
+					if (error.response.status == 422){
+						uni.showToast({
+							icon: 'none',
+							title: '密码错误',
+							duration: 2000
+						});
+					}
+				})
+				console.log(res)
+				if(res.data){
+					uni.setStorageSync('usertoken',res.data.token)
+					uni.setStorageSync('user',res.data.user)
+					console.log(uni.getStorageSync('user'))
+					uni.redirectTo({
+						url:'../index/index'
+					})
+				}
+				else{
+					uni.showToast({
+						icon: 'none',
+					    title: '网络错误，请稍后再试',
+					    duration: 2000
+					});
+				}
+
+			},
+
+			enroll(){
+				uni.redirectTo({
+					url:'../enroll/enroll'
+				})
+			}
 		}
 	}
 </script>
@@ -48,6 +88,7 @@
 .body{
 	height: 100vh;
 	overflow: hidden;
+	background-color: rgba($color: $lighter, $alpha: 0.6);
 	z-index: 0;
 	.titleWord{
 		margin-top: 80rpx;

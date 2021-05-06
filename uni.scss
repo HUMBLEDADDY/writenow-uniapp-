@@ -79,7 +79,7 @@ $primary1: #426B59;
 $primary2: #EBBC65;
 $primary2dark: #DCA04B;
 $white: #FFFFFF;
-$lighter: #F3F3F3;
+$lighter: #fcfaf2;
 $light: #f0f0f0;
 $lightdark: #a3a3a3;
 $dark: #444;
@@ -165,7 +165,28 @@ $black: #000;
     animation-name: up;
 	    animation-duration: 2s;
 }
+.animation-round {
+    animation-name: round;
+	    animation-duration: 2s;
+}
+.animation-roundin {
+    animation-name: roundin;
+	    animation-duration: .5s;
+		right: 0px;
+}
+@keyframes roundin {
+    0% {
+        transform: rotate(90deg);
+		opacity: 0;
+		right: 0px;
+    }
 
+    100% {
+        transform: rotate(0deg);
+		opacity: 1;
+		right: 20px;
+    }
+}
 @keyframes fade {
     0% {
         opacity: 0
@@ -179,7 +200,7 @@ $black: #000;
 @keyframes scale-up {
     0% {
         opacity: 0;
-        transform: scale(.2)
+        transform: scale(.8)
     }
 
     100% {
@@ -191,7 +212,7 @@ $black: #000;
 @keyframes scale-down {
     0% {
         opacity: 0;
-        transform: scale(1.8)
+        transform: scale(1.3)
     }
 
     100% {
@@ -214,8 +235,8 @@ $black: #000;
 
 @keyframes slide-bottom {
     0% {
-        opacity: 0;
-        transform: translateY(100%)
+        opacity: 1;
+        transform: translateY(10%)
     }
 
     100% {
@@ -283,7 +304,7 @@ $black: #000;
 @keyframes slide-right {
     0% {
         opacity: 0;
-        transform: translateX(100%)
+        transform: translateX(10%)
     }
 
     100% {
@@ -329,6 +350,18 @@ $black: #000;
 
 	100% {
 				box-shadow: 5px 5px 15px #7c7c7c;
+	}
+}
+
+@keyframes round {
+	0% {
+		transform: rotate(90deg);
+	}
+
+
+
+	100% {
+		transform: rotate(0deg);
 	}
 }
 			

@@ -7,7 +7,7 @@
 			<view class="input">
 				<input
 				 class="inputElement id" 
-				 v-model="userInfo.id" 
+				 v-model="userInfo.username" 
 				 placeholder="请输入账号" 
 				/>
 				<input
@@ -26,8 +26,8 @@
 				/>
 			</view>
 			<view class="functions">
-				<button class="enroll" type="primary" block>注册</button>
-				<text class="login">已有账号，前去登录</text>
+				<button class="enroll" type="primary" @click="enroll" block>注册</button>
+				<text class="login" @click="login">已有账号，前去登录</text>
 			</view>
 		</view>
 	</view>
@@ -38,7 +38,7 @@
 		data() {
 			return {
 				userInfo:{
-						id:'',
+						username:'',
 						password:'',
 						email:''
 					},
@@ -46,6 +46,36 @@
 			}
 		},
 		methods: {
+			async enroll(){
+				const res = await this.$http.post('enroll',this.userInfo).catch(error=>{
+					if (error.response.status == 423){
+						uni.showToast({
+							icon: 'none',
+							title: '该用户名已经被使用',
+							duration: 2000
+						});
+					}
+				})
+				console.log(res.data)
+				if(res.data){
+					uni.redirectTo({
+						url:'../login/login'
+					})
+				}
+				else{
+					uni.showToast({
+						icon: 'none',
+						title: '网络错误，请稍后再试',
+						duration: 2000
+					});
+				}
+				
+			},
+			login(){
+				uni.redirectTo({
+					url:'../login/login'
+				})
+			},
 			formatter(val) {
 				const reg = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/;
 				if (!val) return '';
@@ -66,6 +96,7 @@
 	height: 100vh;
 	overflow: hidden;
 	z-index: 0;
+	background-color: rgba($color: $lighter, $alpha: 0.6);
 	.titleWord{
 		margin-top: 50rpx;
 		writing-mode:tb-rl;

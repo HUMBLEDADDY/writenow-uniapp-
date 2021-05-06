@@ -72,8 +72,8 @@
 		width: 100%;
 		height: $navHeight;
 		box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.06);
-		background: #fff;
-		z-index: 10;
+		background: #fffffb;
+		z-index: 9999999990;
 	}
 
 	.nav-tab {
@@ -104,7 +104,7 @@
 	}
 
 	.nav-icon .iconfont {
-		font-size: 15px;
+		font-size: 20px;
 		transition: 0.5s;
 	}
 
@@ -134,12 +134,12 @@
 
 	.nav-tab-active .iconfont {
 		font-size: 20px;
-		color: $primary2dark;
+		color: $white;
 		transition: 0.5s;
 	}
 
 	.nav-tab-active .nav-text{
-		color: $primary2dark;
+		color: $dark;
 		font-family: 'shoujin';
 		transition: 0.5s;
 	}

@@ -1,6 +1,6 @@
 <template>
 	<view class="content">
-		<button type="primary" class="skip">跳过</button>
+		<button type="primary" @click="gotoIndex()" class="skip">跳过</button>
 		<view class="welcometext-area">
 			<text class="welcomeword">{{title}} </text>
 		</view>
@@ -16,14 +16,20 @@
 	export default {
 		data() {
 			return {
-				title: '见字如面'
+				title: '见字如面',
+				toindex:{}
 			}
 		},
 		onLoad() {
-
+			this.toindex = setTimeout(this.gotoIndex,3000)
 		},
 		methods: {
-
+			gotoIndex() {
+			  uni.reLaunch({
+				  url: '../index/index'
+			  });
+			  clearTimeout(this.toindex)
+			}
 		}
 	}
 </script>
@@ -39,11 +45,10 @@
 		.skip{
 			height: 50rpx;
 			line-height: 50rpx;
-			// padding: 30rpx;
+			margin-top: 40px;
 			font-size: 0.5rem;
 			color: #595959;
 			background-color: rgba($color: #e2e2e2, $alpha: 0.4);
-			// border: none;
 			position: absolute;
 			right: 40rpx;
 			top: 40rpx;

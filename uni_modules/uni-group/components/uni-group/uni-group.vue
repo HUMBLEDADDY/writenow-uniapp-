@@ -81,7 +81,7 @@
 		font-weight: bold!important;
 	}
 	.uni-group {
-		background-color: rgba($color: #fff, $alpha: 0.4);
+		background-color: rgba($color: #fff, $alpha: 0);
 		margin-top: 10px;
 		// border: 1px red solid;
 	}
@@ -98,7 +98,7 @@
 		align-items: center;
 		padding-left: 15px;
 		height: 40px;
-		background-color: rgba($color: #fff, $alpha: 0.7);
+		background-color: rgba($color: #fff, $alpha: 0);
 		font-weight: normal;
 		color: $uni-text-color;
 	}

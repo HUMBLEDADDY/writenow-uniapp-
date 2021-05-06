@@ -801,7 +801,7 @@
 		top: 0px;
 		left: 0px;
 		right: 0px;
-		background-color: rgba(0, 0, 0, 0.4);
+		/* background-color: rgba(0, 0, 0, 0.4); */
 		transition-duration: 0.3s;
 		z-index: 998;
 	}
