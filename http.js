@@ -3,9 +3,9 @@ import Vue from 'vue'
 import axiosAdapterUniapp from 'axios-adapter-uniapp'
 
 const http = axios.create({
-    // baseURL: 'http://localhost:3000',  
-	baseURL: 'http://124.71.228.65:3000',
-	adapter: axiosAdapterUniapp
+    baseURL: 'http://localhost:3000',  
+	// baseURL: 'http://124.71.228.65:3000',
+	// adapter: axiosAdapterUniapp
 })
 
 

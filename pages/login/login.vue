@@ -1,6 +1,5 @@
 <template>
 	<view class="body">
-
 		<view class="titleWord animation-slide-left">
 			<text class="loginWord ">登录</text>
 		</view>
@@ -21,17 +20,14 @@
 			<view class="functions">
 				<button class="login" @click="login" type="primary" block>登录</button>
 				<text class="enroll" @click="enroll">没有账号，前去注册</text>
-				<!-- <button class="enroll" type="primary" block>注册</button> -->
 			</view>
 		</view>
 	</view>
 </template>
-
 <script>
 	export default {
 		data() {
 			return {
-
 				userInfo:{
 						username:'',
 						password:''
@@ -72,9 +68,7 @@
 					    duration: 2000
 					});
 				}
-
-			},
-
+			}
 			enroll(){
 				uni.redirectTo({
 					url:'../enroll/enroll'
@@ -83,7 +77,6 @@
 		}
 	}
 </script>
-
 <style lang="scss" scoped>
 .body{
 	height: 100vh;
@@ -94,15 +87,12 @@
 		margin-top: 80rpx;
 		writing-mode:tb-rl;
 		border-left: 20rpx solid $primary1;
-		// background-color: $primary1;
 		padding: 10rpx 0;
-		// box-shadow: 5px 5px 10px #939393;
 		.loginWord{
 			font-family: 'shoujin';
 			font-size: 3rem;
 			color: $primary2dark;
 			display: block;
-			// font-weight: bold;
 		}
 	}
 	.loginPart{
@@ -164,5 +154,4 @@
 	position: absolute;
 	z-index: -1;
 }
-
 </style>

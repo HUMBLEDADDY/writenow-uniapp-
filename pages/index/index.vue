@@ -38,7 +38,8 @@
 						console.log(this.windowHeight)
 					}
 				})
-				this.tologin()
+				this.tologin();
+				this.init();
 				console.log(this.windowHeight)
 			},
 		methods: {
@@ -65,6 +66,10 @@
 				}
 	
 			},
+			async init(){
+				const res = await this.$http.post('getStamp',{user:uni.getStorageSync('user')._id})
+				console.log(res.data)
+			}
 		}
 	}
 </script>

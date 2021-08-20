@@ -46,7 +46,7 @@
 				var user = uni.getStorageSync('user')
 				const res1 = await this.$http.post('getUserInfo',{'user':user})
 				var myHobby = res1.data.hobbyStr
-				console.log(res1.data.hobby)
+				console.log(res1)
 				const res2 = await this.$http.post('getNewFriends',{'hobbyStr':myHobby})
 				var data = res2.data
 				for(let j in data){

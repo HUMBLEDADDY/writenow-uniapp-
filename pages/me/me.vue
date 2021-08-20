@@ -13,6 +13,9 @@
 				<view class="editInfo" @click="editInfo">
 					编辑信息
 				</view>
+				<view class="Stamps" @click="Stamps">
+					集邮册
+				</view>
 				<view class="aboutTheDeveloper" @click="aboutTheDeveloper">
 					关于开发者
 				</view>
@@ -60,6 +63,11 @@
 			editInfo(){
 				uni.navigateTo({
 					url:'../editInfo/editInfo'
+				})
+			},
+			Stamps(){
+				uni.navigateTo({
+					url:'../Stamps/Stamps'
 				})
 			},
 			aboutTheDeveloper(){

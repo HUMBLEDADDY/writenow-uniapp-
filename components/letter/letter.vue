@@ -39,15 +39,17 @@
 		box-sizing: border-box;
 		font-family: 'shoujin';
 		font-weight: bold;
-		font-size: 1.5rem;
+		font-size: 40rpx;
+		
 		letter-spacing: 1px;
 		color: #333;
 		.content{
 			height: 80%;
+			line-height: 48.33rpx;
 			word-wrap:break-word;
 			 text-overflow:ellipsis;
 			width: 100%;
-
+			// background-color: #F56723;
 			overflow: hidden;
 			/*将对象作为弹性伸缩盒子模型显示*/
 			display: -webkit-box;

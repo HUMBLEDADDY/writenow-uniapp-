@@ -71,6 +71,13 @@
             }
             
         }
+        ,{
+            "path" : "pages/Stamps/Stamps",                                                                                 
+            "style" : {
+                "navigationStyle" : "custom"
+            }
+            
+        }
     ],
     "globalStyle" : {
         "navigationBarTextStyle" : "black",

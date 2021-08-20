@@ -303,20 +303,10 @@
 			    return Math.ceil((nowTime-birthDayTime)/31536000000);
 			    },
 			getDate() {
-				// 获取当前日期
 				var date = new Date();
-				
-				// 获取当前月份
 				var nowMonth = date.getMonth() + 1;
-				
-				// 获取当前是几号
 				var strDate = date.getDate();
-				
-				// 添加分隔符“-”
 				var seperator = "-";
-				
-				
-				// 最后拼接字符串，得到一个格式为(yyyy-MM-dd)的日期
 				var nowDate = date.getFullYear() + seperator + nowMonth + seperator + strDate;
 				this.nowDate = nowDate;
 			},
@@ -362,7 +352,7 @@
 								// console.log(JSON.parse(data));
 								// this.change('avatar',uploadFileRes.data.url)
 								// this.formData.avatar = JSON.parse(uploadFileRes.data).url
-								let url = JSON.parse(data).url.split('http://localhost:3000').pop()
+								let url = JSON.parse(data).url.split('http://124.71.228.65:3000').pop()
 								console.log(url)
 								this.$set(this.formData,'avatar','http://124.71.228.65:3000'+url);
 								console.log(this.formData.avatar)

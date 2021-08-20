@@ -15,12 +15,27 @@
 							{{nowDate}}
 						</view>
 					</view>
+					<image class="stamp" :src="theChooseStamp" mode="aspectFit" @click="openPicker()"></image>
 				</view>
 				<textarea class="content" maxlength="-1" v-model="content">
 				</textarea>
 			</view>
 			<view class="add animation-roundin" @click="send" type="primary">
 				寄出
+			</view>
+		</view>
+		<view class="select " v-if="choosing">
+			<view class="selectCard animation-scale-up">
+				<view class="title">
+					请选择使用的邮票
+				</view>
+				<view class="stampPicker">
+					<scroll-view class="scroll-view_H" scroll-x="true" scroll-left="0">
+						<view class="stamp  scroll-view-item_H animation-slide-right" v-for="item in stampUrlList" @click="choose(item)">
+							<image :src="item" class="stampImage " mode="aspectFit"></image>
+						</view>
+					</scroll-view>
+				</view>
 			</view>
 		</view>
 	</view>
@@ -40,6 +55,9 @@
 				},
 				nowDate:'',
 				content:'',
+				stampUrlList:[],
+				theChooseStamp:'',
+				choosing:false
 
 			}
 		},
@@ -68,7 +86,25 @@
 			},
 			async init(User){
 				const res = await this.$http.post('getUserInfo',{user:User})
-				this.UserInfo = res.data
+				this.UserInfo = res.data;
+				var user = uni.getStorageSync('user')._id;
+				const res1 = await this.$http.post('getAllStamps',{'user':user})
+				var stampList = res1.data
+				var stampUrlList = [];
+				for(let i in stampList){
+					let url = 'http://124.71.228.65:3000/stamps/'+stampList[i]+'.png'
+					stampUrlList.push(url)
+				}
+				console.log(stampUrlList)
+				this.stampUrlList = stampUrlList
+				this.theChooseStamp =stampUrlList[0]
+			},
+			choose(item){
+				this.theChooseStamp = item
+				this.choosing = false
+			},
+			openPicker(){
+				this.choosing = true
 			},
 			async send(){
 				console.log(uni.getStorageSync('user')._id)
@@ -93,6 +129,8 @@
 				letter.content = this.content;
 				letter.sendTime = sendTime;
 				letter.arriveTime = arriveTime;
+				let stamp = this.theChooseStamp.split('http://124.71.228.65:3000/stamps/').pop().split('.png')[0]
+				letter.stamp = stamp
 				const res1 = await this.$http.post('sendLetter',letter)
 				console.log(res1)
 				var timeTitle = '预计'+(timeSpan+1)+'小时后送达'
@@ -135,19 +173,24 @@
 			border-radius: 10px;
 			margin: 0 auto 30px;
 			.info{
-				padding: 20px;
+				height: 150px;
+				// padding: 20px;
 				border-bottom: 1px solid #eee;
 				display: flex;
+				align-items: center;
+				position: relative;
 				.avatar{
-					width: 50px;
-					height: 50px;
+			
+					width: 60px;
+					height: 60px;
 					border-radius: 50px;
-					// background-image: url(../../static/bgi1.jpg);
+					background-image: url(../../static/bgi1.jpg);
 					background-position: center;
 					background-size: cover;
 				}
 				.nameAndTime{
-					height: 50px;
+			
+					height: 60px;
 					margin-left: 10px;
 					display: flex;
 					flex-direction: column;
@@ -164,7 +207,16 @@
 						font-family: 'shoujin';
 						color: #777;
 					}
-
+			
+				}
+				.stamp{
+					position: absolute;
+					height: 150px;
+					width: 150px;
+					background-position: center;
+					background-size: 100%;
+					background-repeat: no-repeat;
+					right: 0px;
 				}
 			}
 			.content{
@@ -197,6 +249,57 @@
 			writing-mode:tb-rl;
 		}
 	}
+	.select{
+		width: 100vw;
+		height: 100vh;
+		position: absolute;
+		top: 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: rgba($color: #000, $alpha: 0.4);
+		
+		.selectCard{
+			width: 80%;
+			height: 50%;
+			background-color: $lighter;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+			border-radius: 10px;
+			// padding: 10px;
+			box-sizing: border-box;
+			overflow: hidden;
+			
+			.title{
+				width: 101%;
+				background-color: $primary1;
+				height: 41px;
+				position: relative;
+				top: -1px;
+				color: $lighter;
+				font-family: 'shoujin';
+				font-size: 1.2rem;
+				font-weight: bold;
+				padding-left: 10px;
+				line-height: 40px;
+			}
+			.stampPicker{
+				padding-top: 30px;
+				.stamp{
+					width: fit-content;
+					height: fit-content;
+					background-color: rgba($color: $lighter, $alpha: 0.6);
+					box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+					border-radius: 10px;
+					padding: 0 10rpx;
+				
+					.stampImage{
+						max-width: 250rpx;
+						max-height: 500rpx;
+					}
+				}
+			}
+		}
+	}
 	.body::after {
 		content: "";
 		background-image: url(../../static/bgi5.jpg);
@@ -226,4 +329,18 @@
 		background-color: rgba($color: $lighter, $alpha: 0.8);
 		// padding-bottom: 49px;
 	}
+	.scroll-view_H {
+		
+		white-space: nowrap;
+		width: 100%;
+		
+	}
+	
+	.scroll-view-item_H {
+		position: relative;
+		display: inline-block;
+		white-space: pre-wrap;
+		margin: 20px;
+	}
+
 </style>
